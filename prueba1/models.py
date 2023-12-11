@@ -1,5 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,BaseUserManager, Permission, Group
+class CustomUser(AbstractUser):
+    name = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
+    documento =  models.CharField(max_length=30)
+    direccion = models.CharField(max_length=100)
+    celular = models.CharField(max_length=30)
+
+    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
+    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
+
+    def __str__(self):
+        return self.username
 
 
 class Cita(models.Model):
@@ -19,7 +31,7 @@ class Cita(models.Model):
     hour_appointment = models.TimeField()
 
     def __str__(self):
-        return f"{self.nombre_dueño} - {self.nombre_mascota_real}"
+        return f"{self.name_owner} - {self.name_pet_real}"
 
     class meta:
         verbose_name = "Cita"
@@ -32,7 +44,7 @@ class EstadoCita(models.Model):
     state = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.estado
+        return self.state
 
     class meta:
         verbose_name = "EstadoCita"
@@ -62,7 +74,7 @@ class HistoriaClinica(models.Model):
     treatment = models.TextField()
 
     def __str__(self):
-        return self.nombre_mascota
+        return self.name_pet
 
     class meta:
         verbose_name = "HistoriaClinica"
@@ -80,7 +92,7 @@ class Mascota(models.Model):
     asset = models.BooleanField()
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
     class meta:
         verbose_name = "Mascota"
@@ -101,7 +113,7 @@ class Producto(models.Model):
     image = models.ImageField(upload_to="productos/", blank=True, null=True)
 
     def __str__(self):
-        return self.descripcion
+        return self.description
 
     class meta:
         verbose_name = "Producto"
@@ -116,7 +128,7 @@ class Servicio(models.Model):
     description_service = models.TextField()
 
     def __str__(self):
-        return self.nombre_servicio
+        return self.name_service
 
     class meta:
         verbose_name = "Servicio"

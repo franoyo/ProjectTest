@@ -1,0 +1,61 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+</head>
+
+<body>
+    <div class="maincointainer1">
+        {% if messages %}
+        {% include 'alertas/alert_register.html'%}
+        <script>
+            const alerta=document.getElementById("main-container");
+            setTimeout(() => {
+                alerta.classList.add("mostrar")
+            }, 500);
+            function cerrar() {
+            const modal = document.getElementById("main-container");
+            modal.classList.remove("mostrar");
+        }
+            </script>
+      {% endif %}
+    
+        <div class="contenido1">
+            <header class="logo">
+                <a class="fix" href="{% url 'index' %}">
+                    <img class="logeishon" src="{% static 'img/best animal2-01 (1).png' %}" alt="logo">
+                </a>
+            </header>
+            <img class="gato" src="{% static 'img/pussy.PNG' %}" alt="gato">
+        </div>
+        <div class="contenido2">
+            <h1 class="register">REGISTRARSE</h1>
+            <form class="formulario" action="{% url 'autenticacion:registrarse' %}" method="post">
+                {% csrf_token %}
+                <input class="reg" name="name" type="text" placeholder="Nombre:" value="{{ request.POST.name }}" required>
+                <input class="reg" name="apellido" type="text" placeholder="Apellido:" value="{{ request.POST.apellido }}" required>
+                <input class="reg" name="documento" type="number" placeholder="Documento:" value="{{ request.POST.documento }}" required>
+                <input class="reg" name="direccion" type="text" placeholder="Direccion:" value="{{ request.POST.direccion }}" required>
+                <input class="reg" name="celular" type="number" placeholder="Celular:" value="{{ request.POST.celular }}" required>
+                <input class="reg" name="email" type="email" placeholder="Email:" value="{{ request.POST.email }}" required>
+                <input class="reg" name="password" type="password" placeholder="Contraseña:" required>
+                <input class="reg" name="password_confirmation" type="password" placeholder="Confirmar contraseña" required>
+                
+                <input class="reg1" type="submit" value="FINALIZADO">
+            </form>
+        </div>
+    </div>
+    <footer class="fnn">
+        <div class="finn">
+            <p class="vet">2022 Clínica Veterinaria Best Animals, todos los derechos reservados </p>
+        </div>
+    </footer>
+</body>
+
+</html>

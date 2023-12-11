@@ -1,0 +1,27 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style69.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main-container" class="container-alert">
+        <div class="alert-body">
+            <div class="container-image">
+                <button class="cerrate" id="cloze" onclick="cerrar()">X</button>
+                <img class="gif-perro" src="{% static 'img/animal-imagen-animada-0013.gif' %}" alt="gif">
+            </div>
+            <div class="container-text">
+                {% for message in messages %}
+                    <span>{{ message }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

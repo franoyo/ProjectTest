@@ -38,6 +38,6 @@ def login(request):
         #context
     })
 def registro(request):
-    return render(request,'registrarse.html',{
+    return render(request,'Auth/registrarse.html',{
         #context
     })
